@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= HtmlService.createHtmlOutputFromFile('css').getContent(); ?>
+  </head>
+  <body>
+    <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
+    <div class="card text-center">
+      <div class="card-header">
+        &#x1f363;寿司カウンター&#x1f363;
+      </div>
+      <div class="card-body">
+        <div id="flash_message" data-message=<?= message ?>></div>
+        <p class="card-text">食べた寿司をカウントしよう</p>
+          <div class="row">
+            <button id="sub_count_btn" class="col-3 btn btn-danger">-</button>
+            <div id="display_result" class="offset-1 col-2">0</div>
+            <div class="col-1">貫</div>
+            <button id="add_count_btn" class="offset-2 col-3 btn btn-primary">+</button>
+          </div>
+          <form method="POST" action="https://script.google.com/macros/s/AKfycbwjoRUKe-kGTyAIe-pXLc2xFVHYzzT8NhNLRied2bo/exec">
+          <input type="hidden" name="sushi_count" value='0'>
+          <div class="row mt-3">
+          <div class="form-check col-6">
+            <input class="form-check-input" value="0" type="radio" name="person" id="person1">
+            <label class="form-check-label" for="person1">
+              おまみ
+            </label>
+          </div>
+          <div class="form-check col-6">
+            <input class="form-check-input" value="1" type="radio" name="person" id="person2" checked>
+            <label class="form-check-label" for="person2">
+              ばぼちぇ
+            </label>
+          </div>
+          </div>
+          <button type="submit" class="btn btn-success mt-3">登録</button>
+          </form>
+      </div>
+    </div>
+    <?!= HtmlService.createHtmlOutputFromFile('index.js').getContent(); ?>
+  </body>
+</html>

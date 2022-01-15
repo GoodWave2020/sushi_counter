@@ -1,0 +1,19 @@
+<script>
+  $('#add_count_btn').on('click', () => {
+    const result = Number($('#display_result').text())
+    $('#display_result').text(result + 1)
+    $('input[name="sushi_count"]').val(result + 1);
+  })
+  $('#sub_count_btn').on('click', () => {
+    const result = Number($('#display_result').text())
+    if (result > 0) {
+      $('#display_result').text(result - 1)
+      $('input[name="sushi_count"]').val(result - 1)
+    }
+  })
+  const flashMessage = $('#flash_message').data('message');
+  if (flashMessage) {
+    $('#flash_message').text('登録に成功しました')
+    $('#flash_message').addClass('alert alert-success')
+  }
+</script>

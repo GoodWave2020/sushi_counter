@@ -1,0 +1,27 @@
+{
+  "name": "sushi_counter",
+  "version": "1.0.0",
+  "description": "寿司をカウントするアプリ",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/google-apps-script": "^1.0.44",
+    "gulp-notify": "^4.0.0",
+    "gulp-plugin-prettier": "^2.0.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-tslint": "^8.1.4",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "prettier": "^2.5.1",
+    "tslint": "^6.1.3",
+    "typescript": "^4.5.4",
+    "typescript-formatter": "^7.2.2"
+  },
+  "dependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2"
+  }
+}
