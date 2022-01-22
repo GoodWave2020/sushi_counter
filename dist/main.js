@@ -1,55 +1,64 @@
+var SUSHI_ROW = {
+    akami: 2,
+    shiromi: 3,
+    hikari: 4,
+    nimono: 5,
+    shell: 6,
+    uni: 7,
+    ikura: 8
+};
 function doGet(e) {
     var template = HtmlService.createTemplateFromFile("index");
     template.message = false;
     return template.evaluate();
 }
 function doPost(e) {
-    // 食べた寿司の数を取得
-    var sushiCount = e.parameter.sushi_count;
-    // 食べた人
-    var person = e.parameter.person;
     // 入力用のスプレッドシートを取得
     var spreadsheet = SpreadsheetApp.openById("1VlORWDOZSEEqw8YLcO-08Jn44-Y_YadBzHgEQhG5SjY");
-    // シートを選択
-    var sheet = spreadsheet.getSheetByName("main");
     // 書き込み
-    writeSushiCount(sushiCount, person, sheet);
+    writeSushiCount(e.parameter, spreadsheet);
     // 元の画面を表示
     var template = HtmlService.createTemplateFromFile("index");
     template.message = true;
     return template.evaluate();
 }
-function writeSushiCount(sushiCount, person, sheet) {
-    // 最終行を取得
-    var lastRow = sheet.getLastRow();
-    // 今日の日付
-    var today = new Date();
+function writeSushiCount(parameter, spreadsheet) {
+    var today = new Date(); // 今日の日付
+    var formattedToday = Utilities.formatDate(today, "JST", "yyyy/MM/dd"); // 日付を文字列に変換
+    var sheets = myAllSheetName(spreadsheet); // シート名を取得
+    // 今日の日付のシート名があるかチェックする。
+    if (!checkNeedToMakeSheet(sheets, formattedToday)) {
+        // 無ければシートを作る。
+        addSheet(spreadsheet, formattedToday);
+    }
+    // シートを取得する。
+    var sheet = spreadsheet.getSheetByName(formattedToday);
     var column = 0;
-    var otherColumn = 0;
-    var targetRow = 0;
     // 人によって書き込む列を決める。
-    if (Number(person) === 0) {
+    if (Number(parameter.person) === 0) {
+        // おまみ
         column = 2;
-        otherColumn = 3;
     }
     else {
+        // ばぼちぇ
         column = 3;
-        otherColumn = 2;
     }
-    var lastRowCell = sheet.getRange(lastRow, column);
-    var lastRowOtherCell = sheet.getRange(lastRow, otherColumn);
-    if (!lastRowCell.isBlank() && !lastRowOtherCell.isBlank()) {
-        targetRow = lastRow + 1;
-    }
-    else {
-        targetRow = lastRow;
-    }
-    // 入力する行, 列
-    var inputSushiCountCell = sheet.getRange(targetRow, column);
-    // 今日の日付
-    var inputDateCell = sheet.getRange(targetRow, 1);
-    // 食べた寿司のデータの入力
-    inputSushiCountCell.setValue(sushiCount);
-    // 食べた日付の入力
-    inputDateCell.setValue(today);
+    Object.keys(SUSHI_ROW).forEach(function (key) {
+        // 入力する行, 列
+        var inputSushiCountCell = sheet === null || sheet === void 0 ? void 0 : sheet.getRange(SUSHI_ROW[key], column);
+        // 食べた寿司のデータの入力
+        inputSushiCountCell === null || inputSushiCountCell === void 0 ? void 0 : inputSushiCountCell.setValue(parameter[key]);
+    });
+}
+function addSheet(spreadsheet, today) {
+    var copySheet = spreadsheet.getSheetByName("ソースシート");
+    var newCopySheet = copySheet === null || copySheet === void 0 ? void 0 : copySheet.copyTo(spreadsheet);
+    newCopySheet === null || newCopySheet === void 0 ? void 0 : newCopySheet.setName(today);
+}
+function myAllSheetName(spreadsheet) {
+    var sheets = spreadsheet.getSheets();
+    return sheets.map(function (sheet) { return sheet.getName(); });
+}
+function checkNeedToMakeSheet(sheets, today) {
+    return sheets.includes(today);
 }

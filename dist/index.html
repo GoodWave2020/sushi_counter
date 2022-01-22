@@ -7,35 +7,81 @@
   <body>
     <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
     <div class="card text-center">
-      <div class="card-header">
+      <div class="card-header text-size-60">
         &#x1f363;寿司カウンター&#x1f363;
       </div>
       <div class="card-body">
         <div id="flash_message" data-message=<?= message ?>></div>
-        <p class="card-text">食べた寿司をカウントしよう</p>
-          <div class="row">
-            <button id="sub_count_btn" class="col-3 btn btn-danger">-</button>
-            <div id="display_result" class="offset-1 col-2">0</div>
-            <div class="col-1">貫</div>
-            <button id="add_count_btn" class="offset-2 col-3 btn btn-primary">+</button>
+        <p class="card-text text-size-60">食べた寿司をカウントしよう</p>
+          <div class="row mb-3">
+            <button class="col-2 btn btn-danger sub_count_btn">-</button>
+            <div id="akami" class="offset-1 col-2 text-size-30 display_result">0</div>
+            <div class="col-3 text-size-30">貫(赤身)</div>
+            <button class="offset-2 col-2 btn btn-primary add_count_btn">+</button>
+          </div>
+          <div class="row mb-3">
+            <button class="col-2 btn btn-danger sub_count_btn">-</button>
+            <div id="shiromi" class="offset-1 col-2 text-size-30 display_result">0</div>
+            <div class="col-3 text-size-30">貫(白身)</div>
+            <button class="offset-2 col-2 btn btn-primary add_count_btn">+</button>
+          </div>
+          <div class="row mb-3">
+            <button class="col-2 btn btn-danger sub_count_btn">-</button>
+            <div id="hikari" class="offset-1 col-2 text-size-30 display_result">0</div>
+            <div class="col-3 text-size-30">貫(光もの)</div>
+            <button class="offset-2 col-2 btn btn-primary add_count_btn">+</button>
+          </div>
+          <div class="row mb-3">
+            <button class="col-2 btn btn-danger sub_count_btn">-</button>
+            <div id="nimono" class="offset-1 col-2 text-size-30 display_result">0</div>
+            <div class="col-3 text-size-30">貫(煮物)</div>
+            <button class="offset-2 col-2 btn btn-primary add_count_btn">+</button>
+          </div>
+          <div class="row mb-3">
+            <button class="col-2 btn btn-danger sub_count_btn">-</button>
+            <div id="shell" class="offset-1 col-2 text-size-30 display_result">0</div>
+            <div class="col-3 text-size-30">貫(貝類)</div>
+            <button class="offset-2 col-2 btn btn-primary add_count_btn">+</button>
+          </div>
+          <div class="row mb-3">
+            <button class="col-2 btn btn-danger sub_count_btn">-</button>
+            <div id="uni" class="offset-1 col-2 text-size-30 display_result">0</div>
+            <div class="col-3 text-size-30">貫(うに)</div>
+            <button class="offset-2 col-2 btn btn-primary add_count_btn">+</button>
+          </div>
+          <div class="row pb-3">
+            <button class="col-2 btn btn-danger sub_count_btn">-</button>
+            <div id="ikura" class="offset-1 col-2 text-size-30 display_result">0</div>
+            <div class="col-3 text-size-30">貫(いくら)</div>
+            <button class="offset-2 col-2 btn btn-primary add_count_btn">+</button>
           </div>
           <form method="POST" action="https://script.google.com/macros/s/AKfycbwjoRUKe-kGTyAIe-pXLc2xFVHYzzT8NhNLRied2bo/exec">
-          <input type="hidden" name="sushi_count" value='0'>
+          <input type="hidden" name="akami" value='0'>
+          <input type="hidden" name="shiromi" value='0'>
+          <input type="hidden" name="hikari" value='0'>
+          <input type="hidden" name="nimono" value='0'>
+          <input type="hidden" name="shell" value='0'>
+          <input type="hidden" name="uni" value='0'>
+          <input type="hidden" name="ikura" value='0'>
           <div class="row mt-3">
-          <div class="form-check col-6">
-            <input class="form-check-input" value="0" type="radio" name="person" id="person1">
-            <label class="form-check-label" for="person1">
-              おまみ
-            </label>
+            <div class="col-6">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input mr-3" value="0" type="radio" name="person" id="person1">
+                <label class="form-check-label text-size-60" for="person1">
+                  おまみ
+                </label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input align-middle mr-3" value="1" type="radio" name="person" id="person2" checked>
+                <label class="form-check-label text-size-60" for="person2">
+                  ばぼちぇ
+                </label>
+              </div>
+            </div>
           </div>
-          <div class="form-check col-6">
-            <input class="form-check-input" value="1" type="radio" name="person" id="person2" checked>
-            <label class="form-check-label" for="person2">
-              ばぼちぇ
-            </label>
-          </div>
-          </div>
-          <button type="submit" class="btn btn-success mt-3">登録</button>
+          <button type="submit" class="btn btn-success mt-3 text-size-60">登録</button>
           </form>
       </div>
     </div>

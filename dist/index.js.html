@@ -1,14 +1,18 @@
 <script>
-  $('#add_count_btn').on('click', () => {
-    const result = Number($('#display_result').text())
-    $('#display_result').text(result + 1)
-    $('input[name="sushi_count"]').val(result + 1);
+  $('.add_count_btn').on('click', function () {
+    const target = $(this).siblings('.display_result')
+    const result = Number(target.text())
+    target.text(result + 1)
+    const name = target.prop('id')
+    $(`input[name="${name}"]`).val(result + 1);
   })
-  $('#sub_count_btn').on('click', () => {
-    const result = Number($('#display_result').text())
+  $('.sub_count_btn').on('click', function () {
+    const target = $(this).siblings('.display_result')
+    const result = Number(target.text())
     if (result > 0) {
-      $('#display_result').text(result - 1)
-      $('input[name="sushi_count"]').val(result - 1)
+      target.text(result - 1)
+      const name = target.prop('id')
+      $(`input[name="${name}"]`).val(result - 1)
     }
   })
   const flashMessage = $('#flash_message').data('message');
