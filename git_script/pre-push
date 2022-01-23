@@ -1,0 +1,6 @@
+#!/bin/sh
+
+clasp push
+clasp deploy -i AKfycbzb2ipg5L1phU7vjzw9gg4T8zeqt8pe_x_CxJ4dP8EjZQAiar2CPZMFCXNL28lOfp1y --description "test"
+
+exit 0
