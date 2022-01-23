@@ -55,14 +55,19 @@
             <div class="col-3 text-size-30">貫(いくら)</div>
             <button class="offset-2 col-2 btn btn-primary add_count_btn">+</button>
           </div>
+          <div class="row pb-3">
+            <div class="col-4 text-size-30">合計</div>
+            <div id="sum" class="col-4 text-size-30 display_result">0</div>
+            <div class="col-4 text-size-30">貫</div>
+          </div>
           <form method="POST" action="https://script.google.com/macros/s/AKfycbwjoRUKe-kGTyAIe-pXLc2xFVHYzzT8NhNLRied2bo/exec">
-          <input type="hidden" name="akami" value='0'>
-          <input type="hidden" name="shiromi" value='0'>
-          <input type="hidden" name="hikari" value='0'>
-          <input type="hidden" name="nimono" value='0'>
-          <input type="hidden" name="shell" value='0'>
-          <input type="hidden" name="uni" value='0'>
-          <input type="hidden" name="ikura" value='0'>
+          <input class="sushi_count" type="hidden" name="akami" value='0'>
+          <input class="sushi_count" type="hidden" name="shiromi" value='0'>
+          <input class="sushi_count" type="hidden" name="hikari" value='0'>
+          <input class="sushi_count" type="hidden" name="nimono" value='0'>
+          <input class="sushi_count" type="hidden" name="shell" value='0'>
+          <input class="sushi_count" type="hidden" name="uni" value='0'>
+          <input class="sushi_count" type="hidden" name="ikura" value='0'>
           <div class="row mt-3">
             <div class="col-6">
               <div class="form-check form-check-inline">
@@ -81,7 +86,10 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success mt-3 text-size-60">登録</button>
+          <div>
+            <button type="submit" class="btn btn-success mt-3 text-size-60">登録</button>
+            <button id="reset_btn" type="button" class="btn btn-secondary mt-3 text-size-60">リセット</button>
+          </div>
           </form>
       </div>
     </div>

@@ -1,10 +1,45 @@
 <script>
+  const SUSHI_ROW = {
+    akami: 2,
+    shiromi: 3,
+    hikari: 4,
+    nimono: 5,
+    shell: 6,
+    uni: 7,
+    ikura: 8
+  };
+  const sum = () => {
+    let sum = 0
+    $('.sushi_count').each((_, input) => {
+      let value = $(input).val()
+      sum += Number(value)
+    })
+    $('#sum').text(sum)
+  }
+  Object.keys(SUSHI_ROW).forEach(function (key) {
+    let value = localStorage.getItem(key)
+    if (value !== null) {
+      $(`input[name="${key}"]`).val(value)
+      $(`#${key}`).text(value)
+    }
+  })
+  sum()
+  $('#reset_btn').on('click', function () {
+    localStorage.clear();
+    Object.keys(SUSHI_ROW).forEach(function (key) {
+      $(`#${key}`).text(0)
+      $(`input[name="${key}"]`).val(0)
+    })
+    $('#sum').text(0)
+  })
   $('.add_count_btn').on('click', function () {
     const target = $(this).siblings('.display_result')
     const result = Number(target.text())
     target.text(result + 1)
     const name = target.prop('id')
+    localStorage.setItem(name, result + 1);
     $(`input[name="${name}"]`).val(result + 1);
+    sum()
   })
   $('.sub_count_btn').on('click', function () {
     const target = $(this).siblings('.display_result')
@@ -12,8 +47,10 @@
     if (result > 0) {
       target.text(result - 1)
       const name = target.prop('id')
+      localStorage.setItem(name, result - 1);
       $(`input[name="${name}"]`).val(result - 1)
     }
+    sum()
   })
   const flashMessage = $('#flash_message').data('message');
   if (flashMessage) {
