@@ -5,6 +5,8 @@ const typescript = require('gulp-typescript');
 const tslint = require("gulp-tslint");
 const prettier = require('gulp-plugin-prettier');
 const del = require('del');
+// tsconfigの設定を反映
+const tsProject = typescript.createProject("tsconfig.json");
 
 const paths = {
     'ts': './ts/',
@@ -15,7 +17,7 @@ const paths = {
 // typesciptをbuildする。
 const ts = () => {
     return src([paths.tmp + '*.ts', '!./node_modules/**'])
-        .pipe(typescript())
+        .pipe(tsProject())
         .pipe(dest(paths.dist));
 };
 

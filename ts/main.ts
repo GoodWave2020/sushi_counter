@@ -1,4 +1,8 @@
-const SUSHI_ROW: any = {
+interface SushiObj {
+  [prop: string]: number,
+}
+
+const SUSHI_ROW: SushiObj = {
   akami: 2,
   shiromi: 3,
   hikari: 4,
@@ -64,6 +68,6 @@ function myAllSheetName(spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet) {
   return sheets.map(sheet => sheet.getName());
 }
 
-function checkNeedToMakeSheet(sheets: any, today: string) {
+function checkNeedToMakeSheet(sheets: string[], today: string) {
   return sheets.includes(today);
 }
